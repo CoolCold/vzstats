@@ -2,6 +2,7 @@
 
 . /etc/vz/vzstats.conf
 IDFILE=/etc/vz/.vzstats-uuid
+VERSION=0.1
 
 # Check that config is sufficient
 set -u
@@ -50,6 +51,7 @@ fi
 
 
 LOG=collect.log
+echo "== vzstats $VERSION ==" > $OUTDIR/$LOG
 for S in $SCRIPTS; do
 	NAME=$(basename $S)
 	echo "== executing $S ==" >> $OUTDIR/$LOG
