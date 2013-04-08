@@ -1,0 +1,60 @@
+#!/bin/sh
+
+. /etc/vz/vzstats.conf
+IDFILE=/etc/vz/.vzstats-uuid
+
+# Check that config is sufficient
+set -u
+echo $REP_DIR $SUBMIT_URL >/dev/null
+# Check that scripts directory exist and is not empty
+ls $REP_DIR/* >/dev/null || exit 1
+
+err() {
+	echo "$*, aborting" 2>&1
+	exit 1
+}
+
+check_id() {
+	if ! echo $1 | grep -qiE '^\{?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}?$'; then
+		rm -f $IDFILE
+		err "Invalid UUID $1"
+	fi
+}
+
+get_id() {
+	local id
+
+	if test -f $IDFILE; then
+		id=$(cat $IDFILE)
+	else
+		# Check that IDFILE is writeable
+		echo > $IDFILE || exit 1
+		id=$(curl -sS -F magic_word=very-please $GET_ID_URL)
+		echo $id > $IDFILE || exit 1
+	fi
+
+	check_id "$id"
+	UUID=$id
+}
+
+get_id
+
+OUTDIR=$(mktemp -d)
+OUT=$(mktemp --suffix .tar.gz)
+trap "rm -fr $OUTDIR $OUT" INT TERM EXIT
+SCRIPTS=$(find $REP_DIR -type f -executable -print | sort)
+
+if test -z "$SCRIPTS"; then
+	err "No scripts found in $REP_DIR"
+fi
+
+
+LOG=collect.log
+for S in $SCRIPTS; do
+	NAME=$(basename $S)
+	echo "== executing $S ==" >> $OUTDIR/$LOG
+	$S > $OUTDIR/$NAME 2>>$OUTDIR/$LOG
+done
+
+tar czf $OUT -C $OUTDIR . || exit 1
+curl -F uuid=$UUID -F file=@${OUT} $SUBMIT_URL

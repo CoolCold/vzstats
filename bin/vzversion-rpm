@@ -1,0 +1,4 @@
+#!/bin/sh
+if which rpm >/dev/null 2>&1; then
+	rpm -qa vzstats\* vzctl\* ploop\* vzquota kernel vzkernel ovzkernel
+fi

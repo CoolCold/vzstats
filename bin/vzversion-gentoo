@@ -1,0 +1,4 @@
+#!/bin/sh
+if which equery >/dev/null 2>&1; then
+	equery --quiet list vzctl\* ploop\* vzquota \*kernel\* openvz-sources\*
+fi

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if which pacman >/dev/null 2>&1; then
+	pacman -Q | grep -E 'vzstats|vzctl|ploop|vzquota|kernel'
+fi
