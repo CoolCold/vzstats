@@ -27,16 +27,21 @@ clean:
 
 # Tar and rpm build
 SPEC=$(NAME).spec
-VERSION=$(shell awk '/^Version:/{print $$2}' $(SPEC))
+VERSION_SPEC=$(shell awk '/^Version:/{print $$2}' $(SPEC))
+VERSION_FILE=$(shell awk -F = '($$1=="VERSION") {print $$2}' $(NAME))
 RELEASE=$(shell awk '/^%define rel / {if ($$3 != 1) print "-"$$3}' $(SPEC))
-NAMEVER=$(NAME)-$(VERSION)$(RELEASE)
+NAMEVER=$(NAME)-$(VERSION_SPEC)$(RELEASE)
 TARBALL=$(NAMEVER).tar.bz2
+
+check-version:
+	test "$(VERSION_SPEC)" = "$(VERSION_FILE)" || exit 1
+.PHONY: check-version
 
 dist: tar
 tar: $(TARBALL)
 .PHONY: dist tar
 
-$(TARBALL): clean
+$(TARBALL): check-version clean
 	rm -f ../$(NAMEVER)
 	ln -s `pwd | awk -F / '{print $$NF}'` ../$(NAMEVER)
 	tar --directory .. --exclude-vcs --exclude .depend \
