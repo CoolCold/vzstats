@@ -30,6 +30,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sbindir}/vzstats
 %config %{_sysconfdir}/vz/vzstats.conf
 %ghost %config(missingok) %{_sysconfdir}/vz/.vzstats-uuid
+%dir %{_libexecdir}/%{name}
 %{_libexecdir}/%{name}/*
 %{_sysconfdir}/cron.monthly/*
 %doc README COPYING
