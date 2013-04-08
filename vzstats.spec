@@ -35,7 +35,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sysconfdir}/cron.monthly/*
 %doc README COPYING
 
-%triggerin -p %{_sbindir}/vzstats -- vzctl,vzquota,ploop,kernel,vzkernel,ovzkernel
+%triggerin -p %{_sbindir}/vzstats -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
 
 %changelog
 * Thu Apr  4 2013 Kir Kolyshkin <kir@openvz.org> - 0.1-1
