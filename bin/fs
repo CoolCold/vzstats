@@ -1,0 +1,12 @@
+#!/bin/sh
+# Report /vz file system (like ext4).
+
+unset VEID
+. /etc/vz/vz.conf
+
+# Exit in case of unset variable
+set -u
+echo $VE_PRIVATE >/dev/null
+
+MOUNT=$(df -k $VE_PRIVATE | awk 'END {print $NF}')
+awk '($2 == "'$MOUNT'") {print $3}' /proc/mounts
