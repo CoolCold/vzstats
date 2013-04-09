@@ -1,1 +1,1 @@
-vzlist -aH -o ctid,status,layout,vswap
+vzlist -aH -o status,layout,vswap
