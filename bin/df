@@ -1,1 +1,10 @@
-df
+#!/bin/sh
+# Report /vz disk space usage
+
+unset VEID
+. /etc/vz/vz.conf
+
+# Exit in case of unset variable
+set -u
+
+df -k $VE_PRIVATE
