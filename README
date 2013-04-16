@@ -1,1 +1,5 @@
-This is vzstats, a tool to report OpenVZ usage.
+This is vzstats client, a tool to report OpenVZ usage.
+
+For more details, see:
+* http://openvz.org/vzstats
+* http://stats.openvz.org
