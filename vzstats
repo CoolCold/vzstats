@@ -5,6 +5,7 @@ test -f /etc/vz/vzstats-disable && exit 0
 . /etc/vz/vzstats.conf
 IDFILE=/etc/vz/.vzstats-uuid
 VERSION=0.1
+CURL=curl -sS --connect-timeout 3
 
 # Check that config is sufficient
 set -u
@@ -32,7 +33,7 @@ get_id() {
 	else
 		# Check that IDFILE is writeable
 		echo > $IDFILE || exit 1
-		id=$(curl -sS -F magic_word=very-please $GET_ID_URL)
+		id=$(${CURL} -F magic_word=very-please $GET_ID_URL)
 		echo $id > $IDFILE || exit 1
 	fi
 
@@ -61,4 +62,4 @@ for S in $SCRIPTS; do
 done
 
 tar czf $OUT -C $OUTDIR . || exit 1
-curl -F uuid=$UUID -F file=@${OUT} $SUBMIT_URL
+${CURL} -F uuid=$UUID -F file=@${OUT} $SUBMIT_URL
