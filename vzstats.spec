@@ -1,6 +1,7 @@
 Name:		vzstats
 Version:	0.1
 Release:	1%{?dist}
+BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
 
 Group:		Applications/System
