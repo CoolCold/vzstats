@@ -13,6 +13,7 @@ install:
 	install $(NAME) $(DESTDIR)/$(SBINDIR)
 	mkdir -p $(DESTDIR)/$(REPDIR)
 	install bin/* $(DESTDIR)/$(REPDIR)
+.PHONY: install
 
 CRONDIR=/etc/cron.monthly
 install-cronjob:
@@ -20,7 +21,7 @@ install-cronjob:
 	echo "$(NAME)" > $(DESTDIR)$(CRONDIR)/$(NAME)
 	chmod a+x $(DESTDIR)$(CRONDIR)/$(NAME)
 
-.PHONY: install
+.PHONY: install-cronjob
 
 clean:
 .PHONY: clean
