@@ -5,7 +5,7 @@ test -f /etc/vz/vzstats-disable && exit 0
 . /etc/vz/vzstats.conf
 IDFILE=/etc/vz/.vzstats-uuid
 VERSION=0.1
-CURL=curl -sS --connect-timeout 3
+CURL='curl -sS --connect-timeout 3'
 
 # Check that config is sufficient
 set -u
