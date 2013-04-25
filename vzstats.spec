@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.1
+Version:	0.2
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -39,5 +39,9 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %triggerin -p %{_sbindir}/vzstats -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
 
 %changelog
+* Wed Apr 24 2013 Kir Kolyshkin <kir@openvz.org> - 0.2-1
+- first public release
+- added meminfo and ostemplates scripts
+
 * Thu Apr  4 2013 Kir Kolyshkin <kir@openvz.org> - 0.1-1
 - initial packaging
