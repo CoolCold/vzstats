@@ -46,7 +46,9 @@ get_id
 OUTDIR=$(mktemp -d)
 OUT=$(mktemp)
 trap "rm -fr $OUTDIR $OUT" INT TERM EXIT
-SCRIPTS=$(find $REP_DIR -type f -perm /u+x -print | sort)
+SCRIPTS=$(find $REP_DIR -maxdepth 1 -type f -user 0 -group 0 \
+	-perm -u+rx -not -perm -g+w -not -perm -o+w \
+	-print | sort)
 
 if test -z "$SCRIPTS"; then
 	err "No scripts found in $REP_DIR"
