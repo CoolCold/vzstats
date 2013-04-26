@@ -44,9 +44,9 @@ get_id() {
 get_id
 
 OUTDIR=$(mktemp -d)
-OUT=$(mktemp --suffix .tar.gz)
+OUT=$(mktemp)
 trap "rm -fr $OUTDIR $OUT" INT TERM EXIT
-SCRIPTS=$(find $REP_DIR -type f -executable -print | sort)
+SCRIPTS=$(find $REP_DIR -type f -perm /u+x -print | sort)
 
 if test -z "$SCRIPTS"; then
 	err "No scripts found in $REP_DIR"
