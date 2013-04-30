@@ -1,0 +1,12 @@
+The Debian Package vzstats
+----------------------------
+
+Package contains utility to gather and post OpenVZ related statistics like
+kernel version, cpu, memory and such. See more info http://openvz.org/Vzstats
+
+
+To disable startup of vzstats, create file /etc/vz/vzstats-disable .
+
+By default, this utility will be started by cron once a month.
+
+ -- Roman Ovchinnikov <coolthecold@gmail.com>  Wed May  1 01:22:34 MSK 2013

@@ -1,0 +1,17 @@
+Source: vzstats
+Section: admin
+Priority: extra
+Maintainer: Roman Ovchinnikov <coolthecold@gmail.com>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+Homepage: http://openvz.org/Vzstats
+
+Package: vzstats
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, curl
+Description: tool to gather OpenVZ usage (as solution) statistics
+ this package contains utility to gather OpenVZ statistics - kernel version,
+ cpu arch/cores, memory and swap count, OpenVZ related software versions.
+ All submissions are anonymous and is not including your IPs,
+ MAC addresses, host names etc.
+ World wide data are displayed here http://openvz.org/Vzstats

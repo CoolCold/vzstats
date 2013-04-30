@@ -1,0 +1,5 @@
+vzstats (0.2.1-1) unstable; urgency=low
+
+  * initial debianization
+
+ --  Roman Ovchinnikov <coolthecold@gmail.com>  Wed, 01 May 2013 01:34:44 +0400

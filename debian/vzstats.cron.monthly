@@ -1,0 +1,11 @@
+#!/bin/sh
+vzstatsbin="/usr/sbin/vzstats"
+
+#the next thing may happen if package is removed,
+#but config files were not purged
+[ -x $vzstatsbin ] || exit 0
+
+$vzstatsbin
+
+#just in case..
+exit 0
