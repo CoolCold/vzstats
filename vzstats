@@ -43,8 +43,16 @@ echo $REP_DIR $SUBMIT_URL >/dev/null
 ls $REP_DIR/* >/dev/null || exit 1
 
 usage() {
-	echo "vzstats version $VERSION"
-	echo "Usage: vzstats [--view|--help]"
+	cat << EOF
+vzstats version $VERSION
+
+Usage:
+	vzstats [option]
+
+Options:
+	--view		do not send any stats, just see what would be send
+	--help		see this help
+EOF
 
 	exit $1
 }
