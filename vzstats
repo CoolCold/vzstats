@@ -1,6 +1,7 @@
 #!/bin/sh
 
-test -f /etc/vz/vzstats-disable && exit 0
+DISABLED_MARK=/etc/vz/vzstats-disable
+test -f $DISABLED_MARK && exit 0
 
 . /etc/vz/vzstats.conf
 IDFILE=/etc/vz/.vzstats-uuid
