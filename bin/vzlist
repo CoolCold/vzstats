@@ -1,1 +1,11 @@
-vzlist -aH -o status,layout,vswap
+#!/bin/sh
+
+FIELDS="status"
+# Only add the following fields if they are available
+OPT_FIELDS="layout vswap"
+
+for F in $OPT_FIELDS; do
+	vzlist -L | grep -wq $F && FIELDS="${FIELDS},${F}"
+done
+
+vzlist -aH -o $FIELDS
