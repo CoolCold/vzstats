@@ -30,9 +30,11 @@ EOF
 	exit $1
 }
 
-case $1 in
+while [ $# -gt 0 ]; do
+	case $1 in
 	--view)
 		OPT_VIEW=yes
+		shift
 		;;
 	-h|-?|--help)
 		usage 0
@@ -40,7 +42,8 @@ case $1 in
 	*)
 		usage 1
 		;;
-esac
+	esac
+done
 
 err() {
 	echo "$*, aborting" 2>&1
