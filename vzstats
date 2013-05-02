@@ -1,7 +1,8 @@
 #!/bin/sh
 
 DISABLED_MARK=/etc/vz/vzstats-disable
-test -f $DISABLED_MARK && exit 0
+# vzstats disabled and no arguments provided -- exit now
+test -f $DISABLED_MARK -a $# -eq 0 && exit 0
 
 . /etc/vz/vzstats.conf
 IDFILE=/etc/vz/.vzstats-uuid
@@ -56,6 +57,7 @@ check_id() {
 		err "Invalid UUID $1"
 	fi
 }
+test -f $DISABLED_MARK && err "vzstats disabled"
 
 get_id() {
 	local id
