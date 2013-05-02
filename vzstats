@@ -6,12 +6,32 @@ test -f /etc/vz/vzstats-disable && exit 0
 IDFILE=/etc/vz/.vzstats-uuid
 VERSION=0.2.1
 CURL='curl -sS --connect-timeout 3'
+OPT_VIEW=
 
 # Check that config is sufficient
 set -u
 echo $REP_DIR $SUBMIT_URL >/dev/null
 # Check that scripts directory exist and is not empty
 ls $REP_DIR/* >/dev/null || exit 1
+
+usage() {
+	echo "vzstats version $VERSION"
+	echo "Usage: vzstats [--view|--help]"
+
+	exit $1
+}
+
+case $1 in
+	--view)
+		OPT_VIEW=yes
+		;;
+	-h|-?|--help)
+		usage 0
+		;;
+	*)
+		usage 1
+		;;
+esac
 
 err() {
 	echo "$*, aborting" 2>&1
@@ -63,5 +83,13 @@ for S in $SCRIPTS; do
 	$S > $OUTDIR/$NAME 2>>$OUTDIR/$LOG
 done
 
+if [ -n "$OPT_VIEW" ]; then
+	# Just view, do not set report
+	echo "View mode enabled -- not sending report to $SUBMIT_URL"
+	echo "To review what information would be sent, see $OUTDIR"
+	echo "Do not forget to remove it afterwards"
+	trap "" INT TERM EXIT
+	exit 0
+fi
 tar czf $OUT -C $OUTDIR . || exit 1
 ${CURL} -F uuid=$UUID -F file=@${OUT} $SUBMIT_URL
