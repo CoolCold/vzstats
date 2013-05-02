@@ -8,23 +8,25 @@ VERSION=0.2.1
 
 # Autodiscover proxy
 discover_proxy() {
+	local proxy_line
+
 	if [ ! -z "$http_proxy" ]; then
 		return
 	fi
 
 	if [ -r "/etc/wgetrc" ];then
-		PROXY=$(grep '^http_proxy' /etc/wgetrc | tr -d ' \t');
-		if [ ! -z $PROXY ]; then
-			export $PROXY
+		proxy_line=$(grep '^http_proxy' /etc/wgetrc | tr -d ' \t');
+		if [ ! -z $proxy_line ]; then
+			export $proxy_line
 			return
 		fi
 	fi
 
 	if [ -r "/etc/yum.conf" ];then
-		PROXY=$(grep '^proxy=' /etc/yum.conf);
-		if [ ! -z $PROXY ]; then
-			PROXY=http_$PROXY
-			export $PROXY
+		proxy_line=$(grep '^proxy=' /etc/yum.conf);
+		if [ ! -z $proxy_line ]; then
+			proxy_line=http_$proxy_line
+			export $proxy_line
 			return
 		fi
 	fi
