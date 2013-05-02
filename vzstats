@@ -5,6 +5,32 @@ test -f /etc/vz/vzstats-disable && exit 0
 . /etc/vz/vzstats.conf
 IDFILE=/etc/vz/.vzstats-uuid
 VERSION=0.2.1
+
+# Autodiscover proxy
+discover_proxy() {
+	if [ ! -z "$http_proxy" ]; then
+		return
+	fi
+
+	if [ -r "/etc/wgetrc" ];then
+		PROXY=$(grep '^http_proxy' /etc/wgetrc | tr -d ' \t');
+		if [ ! -z $PROXY ]; then
+			export $PROXY
+			return
+		fi
+	fi
+
+	if [ -r "/etc/yum.conf" ];then
+		PROXY=$(grep '^proxy=' /etc/yum.conf);
+		if [ ! -z $PROXY ]; then
+			PROXY=http_$PROXY
+			export $PROXY
+			return
+		fi
+	fi
+}
+
+discover_proxy
 CURL='curl -sS --connect-timeout 3'
 OPT_VIEW=
 
