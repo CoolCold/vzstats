@@ -24,7 +24,9 @@ Usage:
 	vzstats [option]
 
 Options:
-	--view		do not send any stats, just see what would be send
+	--view		do not send a report, just see what would be send
+	--disable	disable sending vzstats reports
+	--enable	re-enable sending reports
 	--help		see this help
 EOF
 
@@ -36,6 +38,32 @@ while [ $# -gt 0 ]; do
 	--view)
 		OPT_VIEW=yes
 		shift
+		;;
+	--disable)
+		if test -f $DISABLED_MARK; then
+			echo "vzstats was already disabled"
+			exit 0
+		fi
+
+		if touch $DISABLED_MARK; then
+			echo "vzstats disabled -- no reports will be send"
+			exit 0
+		fi
+		# Error creating file
+		exit 1
+		;;
+	--enable)
+		if ! test -f $DISABLED_MARK; then
+			echo "vzstats was already enabled"
+			exit 0
+		fi
+		if rm -f $DISABLED_MARK; then
+			echo "vzstats re-enabled"
+			echo "Please re-run without options to send a report"
+			exit 0
+		fi
+		# Failed to rm mark
+		exit 1
 		;;
 	-h|-?|--help)
 		usage 0
