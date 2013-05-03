@@ -1,6 +1,8 @@
 NAME=vzstats
 ETCDIR=/etc/vz
 SBINDIR=/usr/sbin
+MANDIR=/usr/share/man
+MAN8DIR=$(MANDIR)/man8
 REPDIR=/usr/libexec/$(NAME)
 
 all:
@@ -13,6 +15,8 @@ install:
 	install $(NAME) $(DESTDIR)/$(SBINDIR)
 	mkdir -p $(DESTDIR)/$(REPDIR)
 	install bin/* $(DESTDIR)/$(REPDIR)
+	mkdir -p $(DESTDIR)/$(MAN8DIR)
+	install $(NAME).8 $(DESTDIR)/$(MAN8DIR)
 .PHONY: install
 
 CRONDIR=/etc/cron.monthly

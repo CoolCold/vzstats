@@ -29,6 +29,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 
 %files
 %{_sbindir}/vzstats
+%{_mandir}/man8/vzstats.8.*
 %config %{_sysconfdir}/vz/vzstats.conf
 %ghost %config(missingok) %{_sysconfdir}/vz/.vzstats-uuid
 %dir %{_libexecdir}/%{name}
