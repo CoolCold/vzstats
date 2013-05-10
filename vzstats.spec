@@ -16,6 +16,19 @@ Requires:	curl
 This is an OpenVZ component to gather OpenVZ usage and hardware statistics,
 in order to improve the project.
 
+Statistics gathered and reported include the following:
+1 Hardware info.
+- CPU, disk, memory/swap, PCI devices
+2 Software info.
+- host distribution, versions of OpenVZ components, kernel version
+3 Containers info.
+- number of containers existing/running/using ploop/using vswap
+- OS templates of containers
+For more details, check the scripts in /usr/libexec/vzstats/ directory.
+
+All submissions are anonymous and are not including IP or MAC addresses,
+hostnames etc. Global data are available at http://stats.openvz.org
+
 %prep
 %setup -q
 
