@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.3
+Version:	0.3.1
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -54,7 +54,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %triggerin -p %{_sbindir}/vzstats -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
 
 %changelog
-* Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3-1
+* Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.1-1
 - add options --help, --view, --enable, --disable and --status
 - add vzstats(8) man page
 - add lsbrelease script
