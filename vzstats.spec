@@ -36,7 +36,7 @@ hostnames etc. Global data are available at http://stats.openvz.org
 make %{?_smp_mflags}
 
 %install
-make install install-cronjob DESTDIR=%{buildroot}
+make install install-cronjob install-bashcomp DESTDIR=%{buildroot}
 # Needed for %ghost in %files section below
 touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 
@@ -48,6 +48,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %dir %{_libexecdir}/%{name}
 %{_libexecdir}/%{name}/*
 %{_sysconfdir}/cron.monthly/*
+%{_sysconfdir}/bash_completion.d/*
 %doc README COPYING
 
 %triggerin -p %{_sbindir}/vzstats -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel

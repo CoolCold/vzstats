@@ -19,6 +19,12 @@ install:
 	install $(NAME).8 $(DESTDIR)/$(MAN8DIR)
 .PHONY: install
 
+BASHCDIR=/etc/bash_completion.d
+install-bashcomp:
+	mkdir -p $(DESTDIR)$(BASHCDIR)
+	install bash_completion.sh $(DESTDIR)$(BASHCDIR)/$(NAME)
+.PHONY: install-bashcomp
+
 CRONDIR=/etc/cron.monthly
 install-cronjob:
 	mkdir -p $(DESTDIR)$(CRONDIR)
