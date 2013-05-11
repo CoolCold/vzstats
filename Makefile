@@ -1,6 +1,8 @@
 NAME=vzstats
 ETCDIR=/etc/vz
 SBINDIR=/usr/sbin
+MANDIR=/usr/share/man
+MAN8DIR=$(MANDIR)/man8
 REPDIR=/usr/libexec/$(NAME)
 
 all:
@@ -13,7 +15,15 @@ install:
 	install $(NAME) $(DESTDIR)/$(SBINDIR)
 	mkdir -p $(DESTDIR)/$(REPDIR)
 	install bin/* $(DESTDIR)/$(REPDIR)
+	mkdir -p $(DESTDIR)/$(MAN8DIR)
+	install $(NAME).8 $(DESTDIR)/$(MAN8DIR)
 .PHONY: install
+
+BASHCDIR=/etc/bash_completion.d
+install-bashcomp:
+	mkdir -p $(DESTDIR)$(BASHCDIR)
+	install bash_completion.sh $(DESTDIR)$(BASHCDIR)/$(NAME)
+.PHONY: install-bashcomp
 
 CRONDIR=/etc/cron.monthly
 install-cronjob:
