@@ -51,7 +51,8 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sysconfdir}/bash_completion.d/*
 %doc README COPYING
 
-%triggerin -p %{_sbindir}/vzstats -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
+%triggerin -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
+%{_sbindir}/vzstats
 
 %changelog
 * Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.1-1
