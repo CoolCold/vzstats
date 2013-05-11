@@ -125,7 +125,7 @@ get_id() {
 discover_proxy() {
 	local proxy_line
 
-	if [ ! -z "$http_proxy" ]; then
+	if [ ${http_proxy:-NOTSET} != "NOTSET" ]; then
 		return
 	fi
 
