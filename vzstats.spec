@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.3.1
+Version:	0.3.2
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -55,6 +55,10 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sbindir}/vzstats
 
 %changelog
+* Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.2-1
+- fixed %triggerin
+- fixed "http_proxy: unbound variable" error
+
 * Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.1-1
 - add options --help, --view, --enable, --disable and --status
 - add vzstats(8) man page
