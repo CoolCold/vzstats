@@ -8,7 +8,7 @@ Homepage: http://openvz.org/Vzstats
 
 Package: vzstats
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, curl
+Depends: ${shlibs:Depends}, ${misc:Depends}, curl, lsb-release
 Description: tool to gather OpenVZ usage (as solution) statistics
  this package contains utility to gather OpenVZ statistics - kernel version,
  cpu arch/cores, memory and swap count, OpenVZ related software versions.

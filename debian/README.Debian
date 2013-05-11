@@ -5,7 +5,8 @@ Package contains utility to gather and post OpenVZ related statistics like
 kernel version, cpu, memory and such. See more info http://openvz.org/Vzstats
 
 
-To disable startup of vzstats, create file /etc/vz/vzstats-disable .
+To disable startup of vzstats, create file /etc/vz/vzstats-disable
+or use --disable / --enable options for control.
 
 By default, this utility will be started by cron once a month.
 
