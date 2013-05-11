@@ -57,6 +57,10 @@ install: build
 
 	#this should be redone via quilt patches - http://www.debian.org/doc/manuals/maint-guide/modify.en.html
 	sed -r -i 's,(^REP_DIR=)(.*),\1/usr/share/vzstats/bin,' $(CURDIR)/debian/vzstats/etc/vz/vzstats.conf
+	# bash completion
+	install -d -m0755 '$(INSTALL_DIR)'/etc/bash_completion.d
+	install -m0644 bash_completion.sh '$(INSTALL_DIR)'/etc/bash_completion.d/vzstats
+
 
 # Build architecture-independent files here.
 binary-indep: build install
