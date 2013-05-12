@@ -1,7 +1,7 @@
 NAME=vzstats
 include Makefile.paths
 
-all: $(NAME) $(NAME).conf
+all: $(NAME) $(NAME).conf $(NAME).8
 .PHONY: all
 
 install:
@@ -33,7 +33,7 @@ install-all: install install-bashcomp install-cronjob
 .PHONY: install-all
 
 clean:
-	rm -f $(NAME) $(NAME).conf
+	rm -f $(NAME) $(NAME).conf $(NAME).8
 .PHONY: clean
 
 # Tar and rpm build
