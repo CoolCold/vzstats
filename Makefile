@@ -1,11 +1,7 @@
 NAME=vzstats
-ETCDIR=/etc/vz
-SBINDIR=/usr/sbin
-MANDIR=/usr/share/man
-MAN8DIR=$(MANDIR)/man8
-REPDIR=/usr/libexec/$(NAME)
+include Makefile.paths
 
-all:
+all: $(NAME) $(NAME).conf
 .PHONY: all
 
 install:
@@ -37,6 +33,7 @@ install-all: install install-bashcomp install-cronjob
 .PHONY: install-all
 
 clean:
+	rm -f $(NAME) $(NAME).conf
 .PHONY: clean
 
 # Tar and rpm build

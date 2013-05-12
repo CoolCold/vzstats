@@ -1,4 +1,4 @@
-REP_DIR=/usr/libexec/vzstats
+REP_DIR=@REPDIR@
 URL=http://stats.openvz.org
 SUBMIT_URL=$URL/submit.php
 GET_ID_URL=$URL/genuuid.php

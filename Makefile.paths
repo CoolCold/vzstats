@@ -1,0 +1,17 @@
+# Configuration file
+ETCDIR=/etc/vz
+
+# Binary
+SBINDIR=/usr/sbin
+
+# Man page
+MANDIR=/usr/share/man
+MAN8DIR=$(MANDIR)/man8
+
+# Report script files
+REPDIR=/usr/libexec/$(NAME)
+
+%: %.in
+	sed -e 's!@ETCDIR@!$(ETCDIR)!g' \
+	    -e 's!@REPDIR@!$(REPDIR)!g' \
+		$< > $@

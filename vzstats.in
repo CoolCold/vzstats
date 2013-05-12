@@ -1,11 +1,11 @@
 #!/bin/sh
 
-DISABLED_MARK=/etc/vz/vzstats-disable
+DISABLED_MARK=@ETCDIR@/vzstats-disable
 # vzstats disabled and no arguments provided -- exit now
 test -f $DISABLED_MARK -a $# -eq 0 && exit 0
 
-. /etc/vz/vzstats.conf
-IDFILE=/etc/vz/.vzstats-uuid
+. @ETCDIR@/vzstats.conf
+IDFILE=@ETCDIR@/.vzstats-uuid
 VERSION=0.3.2
 CURL='curl -sS --connect-timeout 3'
 OPT_VIEW=
