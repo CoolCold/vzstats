@@ -33,6 +33,9 @@ install-cronjob:
 
 .PHONY: install-cronjob
 
+install-all: install install-bashcomp install-cronjob
+.PHONY: install-all
+
 clean:
 .PHONY: clean
 

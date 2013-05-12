@@ -36,7 +36,7 @@ hostnames etc. Global data are available at http://stats.openvz.org
 make %{?_smp_mflags}
 
 %install
-make install install-cronjob install-bashcomp DESTDIR=%{buildroot}
+make install-all DESTDIR=%{buildroot}
 # Needed for %ghost in %files section below
 touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 
