@@ -7,7 +7,7 @@ test -f $DISABLED_MARK -a $# -eq 0 && exit 0
 . @ETCDIR@/vzstats.conf
 IDFILE=@ETCDIR@/.vzstats-uuid
 VERSION=0.3.2
-CURL='curl -sS --connect-timeout 3'
+CURL='curl -sS --connect-timeout 10'
 OPT_VIEW=
 
 # Check that config is sufficient
