@@ -175,6 +175,11 @@ if test -z "$SCRIPTS"; then
 	err "No scripts found in $REP_DIR"
 fi
 
+# Make sure we have sbin paths in PATH for our scripts
+for p in /sbin /usr/sbin /usr/local/sbin; do
+	echo ":${PATH}:" | fgrep -q ":${p}:" || PATH="${p}:$PATH"
+done
+export PATH
 
 LOG=collect.log
 echo "== vzstats $VERSION ==" > $OUTDIR/$LOG
