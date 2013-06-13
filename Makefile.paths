@@ -14,4 +14,5 @@ REPDIR=/usr/libexec/$(NAME)
 %: %.in
 	sed -e 's!@ETCDIR@!$(ETCDIR)!g' \
 	    -e 's!@REPDIR@!$(REPDIR)!g' \
+	    -e 's!@VERSION@!$(VERSION)!g' \
 		$< > $@
