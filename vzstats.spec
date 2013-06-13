@@ -52,7 +52,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %doc README COPYING
 
 %triggerin -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
-%{_sbindir}/vzstats
+%{_sbindir}/vzstats &
 
 %changelog
 * Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.2-1
