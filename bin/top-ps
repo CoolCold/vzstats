@@ -1,0 +1,10 @@
+# List of top 5 processes in each CT, by accumulated CPU time
+
+for ve in $(vzlist -1); do
+	echo "----"
+	vzctl exec $ve "ps -e --no-header -o bsdtime,comm	\
+				--cumulative --sort -bsdtime	\
+			| tr ':' ' '				\
+			| awk '{print \$1*60+\$2, \$3}'		\
+			| sort -nr | head -5"
+done
