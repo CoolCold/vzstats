@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.3.2
+Version:	0.4
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -55,6 +55,17 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sbindir}/vzstats &
 
 %changelog
+* Thu Jun 13 2013 Kir Kolyshkin <kir@openvz.org> - 0.4-1
+- added top-ps script
+- fix vzversion-arch for openvz kernel names (#2596)
+- make sure sbin paths are in PATH before running scripts
+- exit with error if run inside CT
+- increased curl timeout from 3s to 10s
+- vzstats.spec: run trigger in background
+- Makefile: support for configurable paths (see Makefile.paths)
+- Makefile: substitute version from spec to script
+- Makefile: add install-all target, use it from spec
+
 * Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.2-1
 - fixed %triggerin
 - fixed "http_proxy: unbound variable" error
