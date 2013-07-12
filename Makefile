@@ -1,5 +1,5 @@
 NAME=vzstats
-CACERT=EssentialSSLCA_2.crt
+CACERT=essential.ca-bundle.crt
 include Makefile.paths
 
 all: $(NAME) $(NAME).conf $(NAME).8
