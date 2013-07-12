@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.4
+Version:	0.5
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -56,6 +56,12 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sbindir}/vzstats &
 
 %changelog
+* Thu Jul 11 2013 Kir Kolyshkin <kir@openvz.org> - 0.5-1
+- enabled SSL when sending reports to stats.openvz.org
+- removed lspci script
+- bin/top-ps: add --quiet to vzctl exec
+- increased curl timeout to 30s
+
 * Thu Jun 13 2013 Kir Kolyshkin <kir@openvz.org> - 0.4-1
 - added top-ps script
 - fix vzversion-arch for openvz kernel names (#2596)
