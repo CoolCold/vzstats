@@ -37,8 +37,8 @@ some usage statistics and sends it to the OpenVZ stats server,
 for processing and analysis. Aggregated statistics from all reports are
 available through the web interface.
 .P
-Statistics reported include some basic hardware information (CPU, RAM, PCI
-information, file system and disk space usage for \fB/vz\fR), software
+Statistics reported include some basic hardware information (CPU, RAM,
+file system and disk space usage for \fB/vz\fR), software
 information (distribution version, kernel version, OpenVZ software versions),
 and some OpenVZ-specific information (number of containers running/total,
 number of containers using \fBvswap\fR and \fBploop\fR, used OS templates
