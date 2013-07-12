@@ -8,7 +8,7 @@ all: $(NAME) $(NAME).conf $(NAME).8
 install:
 	mkdir -p $(DESTDIR)$(ETCDIR)
 	install $(NAME).conf $(DESTDIR)$(ETCDIR)
-	install $(CACERT) $(DESTDIR)$(ETCDIR)
+	install -m 644 $(CACERT) $(DESTDIR)$(ETCDIR)
 	mkdir -p $(DESTDIR)/$(SBINDIR)
 	install $(NAME) $(DESTDIR)/$(SBINDIR)
 	mkdir -p $(DESTDIR)/$(REPDIR)
