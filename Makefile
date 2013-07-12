@@ -1,4 +1,5 @@
 NAME=vzstats
+CACERT=EssentialSSLCA_2.crt
 include Makefile.paths
 
 all: $(NAME) $(NAME).conf $(NAME).8
@@ -7,6 +8,7 @@ all: $(NAME) $(NAME).conf $(NAME).8
 install:
 	mkdir -p $(DESTDIR)$(ETCDIR)
 	install $(NAME).conf $(DESTDIR)$(ETCDIR)
+	install $(CACERT) $(DESTDIR)$(ETCDIR)
 	mkdir -p $(DESTDIR)/$(SBINDIR)
 	install $(NAME) $(DESTDIR)/$(SBINDIR)
 	mkdir -p $(DESTDIR)/$(REPDIR)

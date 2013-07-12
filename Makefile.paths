@@ -15,4 +15,5 @@ REPDIR=/usr/libexec/$(NAME)
 	sed -e 's!@ETCDIR@!$(ETCDIR)!g' \
 	    -e 's!@REPDIR@!$(REPDIR)!g' \
 	    -e 's!@VERSION@!$(VERSION)!g' \
+	    -e 's!@CACERT@!$(CACERT)!g' \
 		$< > $@
