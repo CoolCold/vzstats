@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.5
+Version:	0.5.1
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -56,6 +56,10 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sbindir}/vzstats &
 
 %changelog
+* Fri Jul 12 2013 Kir Kolyshkin <kir@openvz.org> - 0.5.1-1
+- fixed SSL problems on older systems
+- fixed CA cert permissions (a-x)
+
 * Thu Jul 11 2013 Kir Kolyshkin <kir@openvz.org> - 0.5-1
 - enabled SSL when sending reports to stats.openvz.org
 - removed lspci script
