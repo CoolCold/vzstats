@@ -1,9 +1,15 @@
+vzstats (0.5.1-1) unstable; urgency=low
+
+  *  new upstream release
+
+ --  Roman Ovchinnikov <coolthecold@gmail.com>  Thu, 18 Jul 2013 00:24:34 +0400
+
 vzstats (0.3.2-1) unstable; urgency=low
 
   * new upstream release 0.3.2 - some fixes + manpage
   * added deps for lsb-release in debian/control
 
- --  <Roman Ovchinnikov <coolthecold@gmail.com>  Sun, 12 May 2013 02:15:55 +0400
+ --  Roman Ovchinnikov <coolthecold@gmail.com>  Sun, 12 May 2013 02:15:55 +0400
 
 vzstats (0.2.1-1) unstable; urgency=low
 
