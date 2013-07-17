@@ -3,7 +3,7 @@ in order to improve the project.
 
 Statistics gathered and reported include the following:
 1 Hardware info.
-- CPU, disk, memory/swap, PCI devices
+- CPU, disk, memory/swap
 2 Software info.
 - host distribution, versions of OpenVZ components, kernel version
 3 Containers info.

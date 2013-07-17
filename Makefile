@@ -1,16 +1,14 @@
 NAME=vzstats
-ETCDIR=/etc/vz
-SBINDIR=/usr/sbin
-MANDIR=/usr/share/man
-MAN8DIR=$(MANDIR)/man8
-REPDIR=/usr/libexec/$(NAME)
+CACERT=essential.ca-bundle.crt
+include Makefile.paths
 
-all:
+all: $(NAME) $(NAME).conf $(NAME).8
 .PHONY: all
 
 install:
 	mkdir -p $(DESTDIR)$(ETCDIR)
 	install $(NAME).conf $(DESTDIR)$(ETCDIR)
+	install -m 644 $(CACERT) $(DESTDIR)$(ETCDIR)
 	mkdir -p $(DESTDIR)/$(SBINDIR)
 	install $(NAME) $(DESTDIR)/$(SBINDIR)
 	mkdir -p $(DESTDIR)/$(REPDIR)
@@ -33,26 +31,26 @@ install-cronjob:
 
 .PHONY: install-cronjob
 
+install-all: install install-bashcomp install-cronjob
+.PHONY: install-all
+
 clean:
+	rm -f $(NAME) $(NAME).conf $(NAME).8
 .PHONY: clean
 
 # Tar and rpm build
 SPEC=$(NAME).spec
-VERSION_SPEC=$(shell awk '/^Version:/{print $$2}' $(SPEC))
-VERSION_FILE=$(shell awk -F = '($$1=="VERSION") {print $$2}' $(NAME))
+VERSION=$(shell awk '/^Version:/{print $$2}' $(SPEC))
 RELEASE=$(shell awk '/^%define rel / {if ($$3 != 1) print "-"$$3}' $(SPEC))
-NAMEVER=$(NAME)-$(VERSION_SPEC)$(RELEASE)
+NAMEVER=$(NAME)-$(VERSION)$(RELEASE)
 TARBALL=$(NAMEVER).tar.bz2
 
-check-version:
-	test "$(VERSION_SPEC)" = "$(VERSION_FILE)" || exit 1
-.PHONY: check-version
 
 dist: tar
 tar: $(TARBALL)
 .PHONY: dist tar
 
-$(TARBALL): check-version clean
+$(TARBALL): clean
 	rm -f ../$(NAMEVER)
 	ln -s `pwd | awk -F / '{print $$NF}'` ../$(NAMEVER)
 	tar --directory .. --exclude .git --exclude .depend \

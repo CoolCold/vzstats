@@ -1,13 +1,13 @@
 #!/bin/sh
 
-DISABLED_MARK=/etc/vz/vzstats-disable
+DISABLED_MARK=@ETCDIR@/vzstats-disable
 # vzstats disabled and no arguments provided -- exit now
 test -f $DISABLED_MARK -a $# -eq 0 && exit 0
 
-. /etc/vz/vzstats.conf
-IDFILE=/etc/vz/.vzstats-uuid
-VERSION=0.3.2
-CURL='curl -sS --connect-timeout 3'
+. @ETCDIR@/vzstats.conf
+IDFILE=@ETCDIR@/.vzstats-uuid
+VERSION=@VERSION@
+CURL='curl -sS --connect-timeout 30 --cacert @ETCDIR@/@CACERT@'
 OPT_VIEW=
 
 # Check that config is sufficient
@@ -15,6 +15,20 @@ set -u
 echo $REP_DIR $SUBMIT_URL >/dev/null
 # Check that scripts directory exist and is not empty
 ls $REP_DIR/* >/dev/null || exit 1
+
+# Check we are not inside a CT
+check_ct() {
+	local ubc=/proc/user_beancounters
+
+	if test -r $ubc; then
+		if ! egrep -q '^[[:space:]]*0:[[:space:]]' $ubc; then
+			echo "Refusing to run from inside a container!" 1>&2
+			exit 1
+		fi
+	fi
+}
+
+check_ct
 
 usage() {
 	cat << EOF
@@ -161,6 +175,11 @@ if test -z "$SCRIPTS"; then
 	err "No scripts found in $REP_DIR"
 fi
 
+# Make sure we have sbin paths in PATH for our scripts
+for p in /sbin /usr/sbin /usr/local/sbin; do
+	echo ":${PATH}:" | fgrep -q ":${p}:" || PATH="${p}:$PATH"
+done
+export PATH
 
 LOG=collect.log
 echo "== vzstats $VERSION ==" > $OUTDIR/$LOG

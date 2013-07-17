@@ -1,1 +1,4 @@
 vzstats*.tar.bz2
+vzstats
+vzstats.conf
+vzstats.8

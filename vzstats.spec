@@ -1,5 +1,5 @@
 Name:		vzstats
-Version:	0.3.2
+Version:	0.5.1
 Release:	1%{?dist}
 BuildArch:	noarch
 Summary:	OpenVZ stats collection daemon
@@ -18,7 +18,7 @@ in order to improve the project.
 
 Statistics gathered and reported include the following:
 1 Hardware info.
-- CPU, disk, memory/swap, PCI devices
+- CPU, disk, memory/swap.
 2 Software info.
 - host distribution, versions of OpenVZ components, kernel version
 3 Containers info.
@@ -36,7 +36,7 @@ hostnames etc. Global data are available at http://stats.openvz.org
 make %{?_smp_mflags}
 
 %install
-make install install-cronjob install-bashcomp DESTDIR=%{buildroot}
+make install-all DESTDIR=%{buildroot}
 # Needed for %ghost in %files section below
 touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 
@@ -44,6 +44,7 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %{_sbindir}/vzstats
 %{_mandir}/man8/vzstats.8.*
 %config %{_sysconfdir}/vz/vzstats.conf
+%{_sysconfdir}/vz/*.crt
 %ghost %config(missingok) %{_sysconfdir}/vz/.vzstats-uuid
 %dir %{_libexecdir}/%{name}
 %{_libexecdir}/%{name}/*
@@ -52,9 +53,30 @@ touch %{buildroot}%{_sysconfdir}/vz/.vzstats-uuid
 %doc README COPYING
 
 %triggerin -- vzctl,vzctl-core,vzquota,ploop,ploop-lib,kernel,vzkernel,ovzkernel
-%{_sbindir}/vzstats
+%{_sbindir}/vzstats &
 
 %changelog
+* Fri Jul 12 2013 Kir Kolyshkin <kir@openvz.org> - 0.5.1-1
+- fixed SSL problems on older systems
+- fixed CA cert permissions (a-x)
+
+* Thu Jul 11 2013 Kir Kolyshkin <kir@openvz.org> - 0.5-1
+- enabled SSL when sending reports to stats.openvz.org
+- removed lspci script
+- bin/top-ps: add --quiet to vzctl exec
+- increased curl timeout to 30s
+
+* Thu Jun 13 2013 Kir Kolyshkin <kir@openvz.org> - 0.4-1
+- added top-ps script
+- fix vzversion-arch for openvz kernel names (#2596)
+- make sure sbin paths are in PATH before running scripts
+- exit with error if run inside CT
+- increased curl timeout from 3s to 10s
+- vzstats.spec: run trigger in background
+- Makefile: support for configurable paths (see Makefile.paths)
+- Makefile: substitute version from spec to script
+- Makefile: add install-all target, use it from spec
+
 * Fri May 10 2013 Kir Kolyshkin <kir@openvz.org> - 0.3.2-1
 - fixed %triggerin
 - fixed "http_proxy: unbound variable" error

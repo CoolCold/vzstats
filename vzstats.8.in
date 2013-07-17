@@ -19,7 +19,7 @@
 .  hy \\n(HY
 ..
 .
-.TH vzctl 8 "2 May 2013" "OpenVZ" "Containers"
+.TH vzctl 8 "11 May 2013" "OpenVZ" "Containers"
 .SH NAME
 vzstats \- report OpenVZ usage statistics
 .SH SYNOPSIS
@@ -37,8 +37,8 @@ some usage statistics and sends it to the OpenVZ stats server,
 for processing and analysis. Aggregated statistics from all reports are
 available through the web interface.
 .P
-Statistics reported include some basic hardware information (CPU, RAM, PCI
-information, file system and disk space usage for \fB/vz\fR), software
+Statistics reported include some basic hardware information (CPU, RAM,
+file system and disk space usage for \fB/vz\fR), software
 information (distribution version, kernel version, OpenVZ software versions),
 and some OpenVZ-specific information (number of containers running/total,
 number of containers using \fBvswap\fR and \fBploop\fR, used OS templates
@@ -52,8 +52,9 @@ first \fBvzstats\fR run. It is then saved locally and used when sending
 reports.
 .P
 If run without any options and unless disabled, \fBvzstats\fR runs report
-scripts found in \fB/usr/libexec/vzstats/\fR directory, collects their
-output and sends it, as a tarball, to stats server.
+scripts found in \fBREPDIR\fR (defined in \fBvzstats.conf\fR, default is
+\fB@REPDIR@\fR), collects their output and sends it, as a tarball,
+to stats server.
 .SH OPTIONS
 In case any option is provided, no report is being send, instead an action
 denoted by the option is performed.
@@ -79,7 +80,7 @@ Output current \fBvzstats\fR configuration, including:
 .TP
 .B --disable
 Disable reporting. This is performed by creating a marker file,
-.BR /etc/vz/vzstats-disable .
+.BR @ETCDIR@/vzstats-disable .
 \fBvzstats\fR checks this file upon start, and exits if it is present.
 .TP
 .B --enable
@@ -89,9 +90,9 @@ Re-enable reporting.
 Show usage.
 .SH FILES
 .EX
-/etc/vz/vzstats.conf
-/etc/vz/vzstats-disable
-/usr/libexec/vzstats/*
+@ETCDIR@/vzstats.conf
+@ETCDIR@/vzstats-disable
+@REPDIR@/*
 .EE
 .SH SEE ALSO
 .BR vzlist (8),
